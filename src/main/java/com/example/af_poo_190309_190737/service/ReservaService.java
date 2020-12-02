@@ -96,7 +96,7 @@ public class ReservaService {
         }
 
         if(inicio.compareTo(fim) > 0){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! O período de reserva informado não corresponde ao modelo exigido...");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! O período de reserva informado não obecedece às retrições exigidas. Verifique se a data final é menor que a data inicial!");
         }
     }
 

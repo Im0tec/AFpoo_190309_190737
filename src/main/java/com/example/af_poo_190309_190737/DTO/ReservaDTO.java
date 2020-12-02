@@ -13,6 +13,7 @@ public class ReservaDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data_inicio;
 
+    @Future(message = "A data final precisa ser maior que a do sistema!")
     @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data_final;
