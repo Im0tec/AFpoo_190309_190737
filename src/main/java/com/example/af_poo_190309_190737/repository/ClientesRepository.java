@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 public class ClientesRepository {
     private List<Clientes> clientes;
     private int nextCode;
+    private int delCode = -1;
 
     @PostConstruct
     public void criarClientes(){
@@ -59,12 +60,19 @@ public class ClientesRepository {
     }
 
     public Clientes save(Clientes cliente){
-        cliente.setCodigo(nextCode++);
+        if(delCode != -1){
+            cliente.setCodigo(delCode);
+            delCode = -1;
+        }
+        else{
+            cliente.setCodigo(nextCode++);
+        }
         clientes.add(cliente);
         return cliente;
     }
 
     public void remove(Clientes cliente){
+        delCode = cliente.getCodigo();
         clientes.remove(cliente);
     }
 

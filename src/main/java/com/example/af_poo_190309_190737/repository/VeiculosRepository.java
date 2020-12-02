@@ -22,6 +22,7 @@ public class VeiculosRepository {
 
     private List<Veiculos> veiculos;
     private int nextCode;
+    private int delCode = -1;
 
     @PostConstruct
     public void criarVeiculos(){
@@ -66,12 +67,19 @@ public class VeiculosRepository {
     }
 
     public Veiculos save(Veiculos veiculo){
-        veiculo.setCodigo(nextCode++);
+        if(delCode != -1){
+            veiculo.setCodigo(delCode);
+            delCode = -1;
+        }
+        else{
+            veiculo.setCodigo(nextCode++);
+        }
         veiculos.add(veiculo);
         return veiculo;
     }
 
     public void remove(Veiculos veiculo){
+        delCode = veiculo.getCodigo();
         veiculos.remove(veiculo);
     }
 

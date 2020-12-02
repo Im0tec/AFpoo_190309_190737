@@ -20,6 +20,7 @@ public class ReservaRepository {
     
     private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
     private int nextCode = 1;
+    private int delCode = -1;
 
     public List<Reserva> getlAllReservas(){
         return reservas;
@@ -35,13 +36,20 @@ public class ReservaRepository {
     }
 
     public Reserva save(Reserva reserva){
-        reserva.setNumero(nextCode++);
+        if(delCode != -1){
+            reserva.setNumero(delCode);
+            delCode = -1;
+        }
+        else{
+            reserva.setNumero(nextCode++);
+        }
         reservas.add(reserva);
 
         return reserva;
     }
 
     public void remove(Reserva reserva){
+        delCode = reserva.getNumero();
         reservas.remove(reserva);
     }
 
