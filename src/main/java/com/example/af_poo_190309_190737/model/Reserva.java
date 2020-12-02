@@ -59,7 +59,7 @@ public class Reserva {
     }
     
     public double getTotal() {
-        return total;
+        return total();
     }
 
     public void setTotal(double total) {

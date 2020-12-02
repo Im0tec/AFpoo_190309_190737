@@ -46,6 +46,13 @@ public class ClientesController {
         return ResponseEntity.ok(cliente);
     }
 
+    @GetMapping("/{codigo}/reservas")
+    public List<Reserva> reservaByCliente(@PathVariable int codigo){
+        Clientes cliente = service.getClienteByCodigo(codigo);
+        
+        return cliente.getReservas();
+    }
+
     @PostMapping()
     public ResponseEntity<Clientes> save(@RequestBody Clientes cliente, HttpServletRequest request, UriComponentsBuilder builder){
         cliente = service.save(cliente);
@@ -70,8 +77,8 @@ public class ClientesController {
     }
 
     @PostMapping("/{codigoCliente}/veiculos/{codigoVeiculo}")
-    public ResponseEntity<Reserva> reservar(@PathVariable int cliente, @PathVariable int veiculo, @Valid @RequestBody ReservaDTO reservaDTO, HttpServletRequest request, UriComponentsBuilder builder){
-        Reserva reserva = reservaService.save(reservaService.fromDTO(reservaDTO), cliente, veiculo);
+    public ResponseEntity<Reserva> reservar(@PathVariable int codigoCliente, @PathVariable int codigoVeiculo, @Valid @RequestBody ReservaDTO reservaDTO, HttpServletRequest request, UriComponentsBuilder builder){
+        Reserva reserva = reservaService.save(reservaService.fromDTO(reservaDTO), codigoCliente, codigoVeiculo);
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + reserva.getNumero()).build();
 
         return ResponseEntity.created(uriComponents.toUri()).build();
