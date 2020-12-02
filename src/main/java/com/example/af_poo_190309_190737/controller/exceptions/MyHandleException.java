@@ -1,3 +1,10 @@
+/*
+ * Dupla:
+ * Eduardo Campos Gonçalves - 190309
+ * Johanna Bernecker - 190737
+ * 
+ * Turma: CP107TIN1
+ */
 package com.example.af_poo_190309_190737.controller.exceptions;
 
 import java.util.HashMap;
