@@ -89,21 +89,21 @@ public class ReservaService {
         for(Reserva aux: reservas){
             if(aux != reserva){
                 if(!(inicio.compareTo(aux.getData_inicio()) < 0 && fim.compareTo(aux.getData_inicio()) < 0) && !(fim.compareTo(aux.getData_final()) > 0 && inicio.compareTo(aux.getData_final()) > 0)){
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! Veículo já reservado...");
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operação inválida! Veículo já reservado..."));
                 }
             }
         }
         
         if(inicio.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! Não alugamos carros aos domingos...");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operação inválida! Não alugamos carros aos domingos..."));
         }
 
         if(fim.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! Não recebemos carros aos domingos...");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operação inválida! Não recebemos carros aos domingos..."));
         }
 
         if(inicio.compareTo(fim) > 0){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Operação inválida! O período de reserva informado não obecedece às retrições exigidas. Verifique se a data final é menor que a data inicial!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Operação inválida! O período de reserva informado não obecedece às retrições exigidas. Verifique se a data final é menor que a data inicial!"));
         }
     }
 
